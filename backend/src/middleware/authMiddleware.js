@@ -16,8 +16,10 @@ const verifyToken = (req, res, next) => {
   const token = headerToken.split(" ")[1];
   try {
     const decoded = jwt.verify(token, jwtSecret);
+    console.log(decoded);
+    console.log(decoded.data);
     req.user = {
-      _id: decoded.id,
+      _id: decoded.data,
     };
 
     next();
