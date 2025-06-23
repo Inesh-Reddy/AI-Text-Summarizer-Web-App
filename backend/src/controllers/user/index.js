@@ -57,7 +57,7 @@ const login = async (req, res) => {
       }
       const token = jwt.sign(
         {
-          data: exist.password,
+          data: exist._id,
         },
         jwtSecret,
         { expiresIn: "1h" }
