@@ -1,6 +1,10 @@
 const { userModel } = require("../../models/user");
 const bcrypt = require("bcrypt");
-const saltRounds = 10;
+const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
+dotenv.config();
+const saltRounds = parseInt(process.env.SALTROUNDS);
+const jwtSecret = process.env.JWT_SECRET;
 
 const register = async (req, res) => {
   try {
@@ -36,10 +40,37 @@ const register = async (req, res) => {
   }
 };
 
-const login = (req, res) => {
-  res.json({
-    msg: "user login endpoint",
-  });
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const exist = await userModel.findOne({ email });
+    if (!exist) {
+      return res.status(404).json({
+        msg: `Sorry! you are not authorized.`,
+      });
+    }
+    bcrypt.compare(password, exist.password, async (err, result) => {
+      if (err) {
+        return res.status(500).json({
+          msg: err,
+        });
+      }
+      const token = jwt.sign(
+        {
+          data: exist.password,
+        },
+        jwtSecret,
+        { expiresIn: "1h" }
+      );
+      res.status(200).setHeader("token", `Bearer ${token}`).json({
+        msg: "login successful",
+      });
+    });
+  } catch (error) {
+    res.status(500).json({
+      err: error,
+    });
+  }
 };
 
 const logout = (req, res) => {
