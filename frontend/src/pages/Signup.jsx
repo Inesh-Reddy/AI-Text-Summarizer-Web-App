@@ -20,22 +20,26 @@ const Signup = () => {
       "http://localhost:3000/api/v1/user/auth/register",
       { email: username, password }
     );
-    if (response.data.msg == "user created successfully") {
-      navigate("/dashboard", { replace: true });
-      const response = await axios.post(
-        "http://localhost:3000/api/v1/user/auth/",
-        {
-          email: username,
-          password,
+    try {
+      if (response.data.msg == "user created successfully") {
+        navigate("/dashboard", { replace: true });
+        const response = await axios.post(
+          "http://localhost:3000/api/v1/user/auth/",
+          {
+            email: username,
+            password,
+          }
+        );
+
+        const token = response.data.data;
+        if (!token) {
+          throw new Error("No token received from server");
         }
-      );
 
-      const token = response.data.data;
-      if (!token) {
-        throw new Error("No token received from server");
+        localStorage.setItem("token", token);
       }
-
-      localStorage.setItem("token", token);
+    } catch (error) {
+      throw new Error(error);
     }
   };
   return (
@@ -48,10 +52,11 @@ const Signup = () => {
             type="email"
             ref={usernameRef}
             style={{
-              width: "100%",
+              width: "75%",
               padding: "10px",
               marginBottom: "10px",
-              borderRadius: "3px",
+              borderRadius: "7px",
+              backgroundColor: "#dbece7",
               border: "1px solid #ccc",
             }}
             placeholder="Enter username or email"
@@ -63,10 +68,11 @@ const Signup = () => {
             type="password"
             ref={passwordRef}
             style={{
-              width: "100%",
+              width: "75%",
               padding: "10px",
               marginBottom: "10px",
-              borderRadius: "3px",
+              borderRadius: "7px",
+              backgroundColor: "#dbece7",
               border: "1px solid #ccc",
             }}
             placeholder="Enter password"
@@ -77,7 +83,7 @@ const Signup = () => {
           type="submit"
           style={{
             padding: "10px 20px",
-            background: "#007bff",
+            background: "#253c38",
             color: "#fff",
             border: "none",
             borderRadius: "3px",

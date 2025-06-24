@@ -8,7 +8,7 @@ import NotFound from "./pages/NotFound";
 
 function App() {
   return (
-    <>
+    <div style={{ backgroundColor: "#61a092", borderRadius: "8px" }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -19,7 +19,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 export default App;

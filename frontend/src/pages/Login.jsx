@@ -1,70 +1,3 @@
-// import React, { useRef, useState } from "react";
-// import axios from "axios";
-// import { useNavigate } from "react-router-dom";
-
-// const Login = () => {
-//   const userNameRef = useRef(null);
-//   const passwordRef = useRef(null);
-//   const navigate = useNavigate();
-//   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-//   const onSubmitHandler = async (e) => {
-//     e.preventDefault();
-
-//     const userName = userNameRef.current.value;
-//     const password = passwordRef.current.value;
-
-//     if (!userName || !password) {
-//       alert("please fill in both the fields");
-//       return;
-//     }
-
-//     console.log(`username : ${userName} & password: ${password}`);
-//     let result = null;
-//     await axios
-//       .post("http://localhost:3000/api/v1/user/auth/", {
-//         email: userName,
-//         password: password,
-//       })
-//       .then((response) => {
-//         result = response.data.data;
-//       });
-//     localStorage.setItem("token", result);
-//     navigate("/dashboard", { replace: true });
-//     // setIsAuthenticated(true);
-
-//     // if (isAuthenticated) {
-
-//     // }
-//     // setIsAuthenticated(false);
-
-//     userNameRef.current.value = "";
-//     passwordRef.current.value = "";
-//   };
-//   return (
-//     <div>
-//       <h2>Login</h2>
-//       <p>Please enter your credentials to access your account.</p>
-//       <form onSubmit={onSubmitHandler}>
-//         <input
-//           ref={userNameRef}
-//           style={{ padding: "10px" }}
-//           placeholder="username"
-//         />{" "}
-//         <br />
-//         <input
-//           ref={passwordRef}
-//           style={{ padding: "10px" }}
-//           placeholder="password"
-//         />{" "}
-//         <br />
-//         <button>Sign Up</button>
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default Login;
 import React, { useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -124,10 +57,11 @@ const Login = () => {
             type="email"
             ref={userNameRef}
             style={{
-              width: "100%",
+              width: "75%",
               padding: "10px",
               marginBottom: "10px",
-              borderRadius: "3px",
+              borderRadius: "7px",
+              backgroundColor: "#dbece7",
               border: "1px solid #ccc",
             }}
             placeholder="Enter username or email"
@@ -139,10 +73,11 @@ const Login = () => {
             type="password"
             ref={passwordRef}
             style={{
-              width: "100%",
+              width: "75%",
               padding: "10px",
               marginBottom: "10px",
-              borderRadius: "3px",
+              borderRadius: "7px",
+              backgroundColor: "#dbece7",
               border: "1px solid #ccc",
             }}
             placeholder="Enter password"
@@ -153,7 +88,7 @@ const Login = () => {
           type="submit"
           style={{
             padding: "10px 20px",
-            background: "#007bff",
+            background: "#253c38",
             color: "#fff",
             border: "none",
             borderRadius: "3px",
