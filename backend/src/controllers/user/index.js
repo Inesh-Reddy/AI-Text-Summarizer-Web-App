@@ -62,9 +62,13 @@ const login = async (req, res) => {
         jwtSecret,
         { expiresIn: "1h" }
       );
-      res.status(200).setHeader("token", `Bearer ${token}`).json({
-        msg: "login successful",
-      });
+      res
+        .status(200)
+        .setHeader("token", `Bearer ${token}`)
+        .json({
+          msg: "login successful",
+          data: `Bearer ${token}`,
+        });
     });
   } catch (error) {
     res.status(500).json({

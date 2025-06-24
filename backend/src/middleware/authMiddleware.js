@@ -5,7 +5,6 @@ dotenv.config();
 const jwtSecret = process.env.JWT_SECRET;
 
 const verifyToken = (req, res, next) => {
-  console.log(req.headers);
   const headerToken = req.headers.token;
 
   if (!headerToken || !headerToken.startsWith("Bearer ")) {
